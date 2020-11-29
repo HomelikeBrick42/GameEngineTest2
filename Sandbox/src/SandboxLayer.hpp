@@ -12,6 +12,7 @@ namespace Sandbox {
 		virtual void OnUpdate(float dt);
 		virtual void OnRender();
 		virtual void OnImGuiRender();
+		virtual void OnEvent(BrickEngine::Event& e);
 	};
 
 }

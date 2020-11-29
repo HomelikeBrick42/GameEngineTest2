@@ -2,6 +2,8 @@
 
 #include "BrickEngine/Core/Base.hpp"
 
+#include "BrickEngine/Events/Event.hpp"
+
 namespace BrickEngine {
 
 	struct WindowProps
@@ -21,7 +23,7 @@ namespace BrickEngine {
 	class Window
 	{
 	public:
-		using EventCallbackFn = std::function<void()>;
+		using EventCallbackFn = std::function<void(Event&)>;
 	public:
 		virtual ~Window() = default;
 

@@ -15,7 +15,6 @@ namespace Sandbox {
 
 	void SandboxLayer::OnUpdate(float dt)
 	{
-		Log::Info("{0}", 1.0 / dt);
 	}
 
 	void SandboxLayer::OnRender()
@@ -24,6 +23,11 @@ namespace Sandbox {
 
 	void SandboxLayer::OnImGuiRender()
 	{
+	}
+
+	void SandboxLayer::OnEvent(Event& e)
+	{
+		Log::Info("{0}", e);
 	}
 
 }

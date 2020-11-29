@@ -21,6 +21,7 @@ namespace BrickEngine {
 	private:
 		Scope<Window> m_Window;
 		LayerStack m_LayerStack;
+		bool m_Running = true;
 	protected:
 		Application();
 	};

@@ -36,6 +36,7 @@ namespace BrickEngine {
 		{
 			uint32_t Width, Height;
 			int32_t XPos, YPos;
+			EventCallbackFn EventCallback;
 		};
 
 		WindowData m_Data;
