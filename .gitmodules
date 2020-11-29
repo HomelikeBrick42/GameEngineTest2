@@ -1,0 +1,16 @@
+[submodule "BrickEngine/vendor/spdlog"]
+	path = BrickEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "BrickEngine/vendor/GLFW"]
+	path = BrickEngine/vendor/GLFW
+	url = https://github.com/HomelikeBrick42/glfw
+[submodule "BrickEngine/vendor/imgui"]
+	path = BrickEngine/vendor/imgui
+	url = https://github.com/HomelikeBrick42/imgui
+	branch = docking
+[submodule "BrickEngine/vendor/glm"]
+	path = BrickEngine/vendor/glm
+	url = https://github.com/g-truc/glm
+[submodule "BrickEngine/vendor/entt"]
+	path = BrickEngine/vendor/entt
+	url = https://github.com/skypjack/entt
