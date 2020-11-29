@@ -30,11 +30,14 @@ namespace BrickEngine {
 
 #define BRICKENGINE_BIND_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
 
-#ifdef BRICKENGINE_DEBUG
+#if defined(BRICKENGINE_DEBUG)
 	#define BRICKENGINE_CORE_ASSERT(x, ...) if (!(x)) { Log::CoreFatal(__VA_ARGS__); __debugbreak(); }
 	#define BRICKENGINE_ASSERT(x, ...) if (!(x)) { Log::Fatal(__VA_ARGS__); __debugbreak(); }
-#else
+#elif defined(BRICKENGINE_RELEASE)
 	#define BRICKENGINE_CORE_ASSERT(x, ...) if (!(x)) { Log::CoreFatal(__VA_ARGS__); }
 	#define BRICKENGINE_ASSERT(x, ...) if (!(x)) { Log::Fatal(__VA_ARGS__); }
+#else
+	#define BRICKENGINE_CORE_ASSERT(x, ...)
+	#define BRICKENGINE_ASSERT(x, ...)
 #endif
 

@@ -10,6 +10,6 @@
 #include "BrickEngine/Core/Base.hpp"
 #include "BrickEngine/Core/Layer.hpp"
 #include "BrickEngine/Core/LayerStack.hpp"
+#include "BrickEngine/Core/Window.hpp"
 
-// Application
 #include "BrickEngine/Core/Application.hpp"

@@ -7,22 +7,19 @@ namespace Sandbox {
 
 	void SandboxLayer::OnAttach()
 	{
-		Log::Info("OnAttach");
 	}
 
 	void SandboxLayer::OnDetach()
 	{
-		Log::Info("OnDetach");
 	}
 
 	void SandboxLayer::OnUpdate(float dt)
 	{
-		Log::Info("OnUpdate");
+		Log::Info("{0}", 1.0 / dt);
 	}
 
 	void SandboxLayer::OnRender()
 	{
-		Log::Info("OnRender");
 	}
 
 	void SandboxLayer::OnImGuiRender()

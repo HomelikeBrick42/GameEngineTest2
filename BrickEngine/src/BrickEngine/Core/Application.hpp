@@ -3,6 +3,7 @@
 #include "BrickEngine/Core/Base.hpp"
 
 #include "BrickEngine/Core/LayerStack.hpp"
+#include "BrickEngine/Core/Window.hpp"
 
 namespace BrickEngine {
 
@@ -18,6 +19,7 @@ namespace BrickEngine {
 		void PopLayer(Layer* layer) { m_LayerStack.PopLayer(layer); }
 		void PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay); }
 	private:
+		Scope<Window> m_Window;
 		LayerStack m_LayerStack;
 	protected:
 		Application();

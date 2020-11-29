@@ -5,17 +5,26 @@ namespace BrickEngine {
 
 	Application::Application()
 	{
+		m_Window = Window::Create(WindowProps("BrickEngine Window", 1280, 720, false, false));
 	}
 
 	void Application::Run()
 	{
+		std::chrono::steady_clock::time_point time, lastFrame = std::chrono::high_resolution_clock::now();
+		float delta;
 		while (true)
 		{
+			time = std::chrono::high_resolution_clock::now();
+			delta = std::chrono::duration<float>(time - lastFrame).count();
+			lastFrame = time;
+
 			for (auto& layer : m_LayerStack)
-				layer->OnUpdate(0.0f);
+				layer->OnUpdate(delta);
 
 			for (auto& layer : m_LayerStack)
 				layer->OnRender();
+
+			m_Window->PollEvents();
 		}
 	}
 
