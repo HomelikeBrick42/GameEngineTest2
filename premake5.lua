@@ -75,9 +75,7 @@ project "BrickEngine"
 
 	defines
 	{
-		"_CRT_SECURE_NO_WARNINGS",
-		"GLM_FORCE_SWIZZLE",
-		"GLM_FORCE_LEFT_HANDED"
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	filter "system:windows"
@@ -140,8 +138,6 @@ project "Sandbox"
 
 	defines
 	{
-		"GLM_FORCE_SWIZZLE",
-		"GLM_FORCE_LEFT_HANDED"
 	}
 
 	filter "system:windows"
