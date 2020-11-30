@@ -62,6 +62,23 @@ namespace BrickEngine {
 
     void Scene::OnViewportResize(uint32_t width, uint32_t height)
     {
+        float aspect = (float)width / (float)height;
+        m_Registry.view<PerspectiveCameraComponent>().each([&](entt::entity id, PerspectiveCameraComponent& pc)
+            {
+                if (!pc.FixedAspect)
+                {
+                    pc.Width = (float)width;
+                    pc.Height = (float)height;
+                }
+            });
+        m_Registry.view<OrthographicCameraComponent>().each([&](entt::entity id, OrthographicCameraComponent& oc)
+            {
+                if (!oc.FixedAspect)
+                {
+                    oc.Left = -aspect;
+                    oc.Right = aspect;
+                }
+            });
     }
 
 }

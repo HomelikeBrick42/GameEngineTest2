@@ -11,7 +11,7 @@ namespace BrickEngine {
 
 	Application::Application()
 	{
-		m_Window = Window::Create(WindowProps("BrickEngine Window", 1280, 720, false, false));
+		m_Window = Window::Create(WindowProps("BrickEngine Window", 1280, 720, false, true));
 		m_Window->SetEventCallbackFn([&](Event& e)
 			{
 				EventDispatcher dispatcher(e);

@@ -38,6 +38,9 @@ namespace BrickEngine {
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		glFrontFace(GL_CW);
+		glEnable(GL_CULL_FACE);
 	}
 
 	void OpenGLRendererAPI::ClearColor(const glm::vec3& color)
@@ -48,6 +51,11 @@ namespace BrickEngine {
 	void OpenGLRendererAPI::Clear()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	}
+
+	void OpenGLRendererAPI::SetViewport(int32_t x, int32_t y, int32_t width, int32_t height)
+	{
+		glViewport(x, y, width, height);
 	}
 
 }

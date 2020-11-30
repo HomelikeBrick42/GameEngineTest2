@@ -23,6 +23,8 @@ namespace Sandbox {
 
 	void SandboxLayer::OnAttach()
 	{
+		RenderCommand::SetClearColor(0.1f);
+
 		m_Entity = m_Scene.CreateEntity("Test Entity");
 		m_Entity.AddComponent<NativeScriptComponent>().Bind<RotateScript>();
 	}
@@ -39,7 +41,6 @@ namespace Sandbox {
 
 	void SandboxLayer::OnRender()
 	{
-		RenderCommand::ClearColor(glm::vec4(0.0f));
 		RenderCommand::Clear();
 
 		m_Scene.DrawScene();
@@ -48,7 +49,7 @@ namespace Sandbox {
 	void SandboxLayer::OnImGuiRender()
 	{
 		ImGui::Begin("Test Window");
-		ImGui::Text("Frame Time: %.3fms", m_Delta * 1000.0f);
+		ImGui::Text("FPS: %.3f\nFrame Time: %.3fms", 1.0f / m_Delta, m_Delta * 1000.0f);
 		ImGui::End();
 	}
 
@@ -57,6 +58,7 @@ namespace Sandbox {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowResizeEvent>([&](WindowResizeEvent& e)
 			{
+				RenderCommand::SetViewport(0, 0, e.GetWidth(), e.GetHeight());
 				m_Scene.OnViewportResize(e.GetWidth(), e.GetHeight());
 				return false;
 			});

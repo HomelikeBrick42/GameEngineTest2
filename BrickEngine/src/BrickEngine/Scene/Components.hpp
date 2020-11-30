@@ -58,4 +58,40 @@ namespace BrickEngine {
 		}
 	};
 
+	struct PerspectiveCameraComponent
+	{
+		float Width, Height, Fov, Near, Far;
+		bool FixedAspect;
+		bool MainCamera;
+
+		PerspectiveCameraComponent()
+			: Width(1280.0f), Height(720.0f), Fov(glm::radians(45.0f)), Near(0.001f), Far(1000.0f), FixedAspect(true), MainCamera(false) {}
+		PerspectiveCameraComponent(float width, float height, float fov, float _near = 0.001f, float _far = 1000.0f, bool fixedAspect = false)
+			: Width(width), Height(height), Fov(fov), Near(_near), Far(_far), FixedAspect(fixedAspect), MainCamera(false) {}
+
+		glm::mat4 GetMatrix() const
+		{
+			return glm::perspectiveLH(Fov, Width / Height, Near, Far);
+		}
+	};
+
+	struct OrthographicCameraComponent
+	{
+		float Left, Right, Top, Bottom, Near, Far;
+		bool FixedAspect;
+		bool MainCamera;
+
+		OrthographicCameraComponent()
+			: Left(-1.0f), Right(1.0f), Top(1.0f), Bottom(-1.0f), Near(-1.0f), Far(1.0f), FixedAspect(true), MainCamera(false) {}
+		OrthographicCameraComponent(float left, float right, float top, float bottom, float _near = -1.0f, float _far = 1.0f, bool fixedAspect = true)
+			: Left(left), Right(right), Top(top), Bottom(bottom), Near(_near), Far(_far), FixedAspect(fixedAspect), MainCamera(false) {}
+		OrthographicCameraComponent(float aspect, float _near = -1.0f, float _far = 1.0f, bool fixedAspect = false)
+			: Left(-aspect), Right(aspect), Top(1.0f), Bottom(-1.0f), Near(_near), Far(_far), FixedAspect(fixedAspect), MainCamera(false) {}
+
+		glm::mat4 GetMatrix() const
+		{
+			return glm::orthoLH(Left, Right, Bottom, Top, Near, Far);
+		}
+	};
+
 }
