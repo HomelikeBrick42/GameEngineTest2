@@ -4,6 +4,7 @@
 
 #include "BrickEngine/Core/LayerStack.hpp"
 #include "BrickEngine/Core/Window.hpp"
+#include "BrickEngine/GraphicsObjects/GraphicsContext.hpp"
 
 namespace BrickEngine {
 
@@ -22,6 +23,7 @@ namespace BrickEngine {
 		void PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay); }
 	private:
 		Scope<Window> m_Window;
+		Scope<GraphicsContext> m_GraphicsContext;
 		LayerStack m_LayerStack;
 #if BRICKENGINE_ENABLE_IMGUI
 		ImGuiLayer* m_ImGuiLayer = nullptr;

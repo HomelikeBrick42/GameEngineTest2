@@ -24,3 +24,10 @@
 #include "BrickEngine/Scene/Components.hpp"
 #include "BrickEngine/Scene/Entity.hpp"
 #include "BrickEngine/Scene/Scene.hpp"
+
+// Graphics Objects
+#include "BrickEngine/GraphicsObjects/GraphicsContext.hpp"
+
+// Renderer
+#include "BrickEngine/Renderer/RendererAPI.hpp"
+#include "BrickEngine/Renderer/RenderCommand.hpp"

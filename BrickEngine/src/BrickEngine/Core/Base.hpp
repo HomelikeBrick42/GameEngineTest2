@@ -30,11 +30,7 @@ namespace BrickEngine {
 
 #define BRICKENGINE_BIND_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
 
-#if defined(BRICKENGINE_DEBUG) || defined(BRICKENGINE_RELEASE)
-	#define BRICKENGINE_ENABLE_IMGUI 1
-#else
-	#define BRICKENGINE_ENABLE_IMGUI 0
-#endif
+#define BRICKENGINE_ENABLE_IMGUI 1
 
 #if defined(BRICKENGINE_DEBUG)
 	#define BRICKENGINE_CORE_ASSERT(x, ...) if (!(x)) { Log::CoreFatal(__VA_ARGS__); __debugbreak(); }

@@ -39,6 +39,9 @@ namespace Sandbox {
 
 	void SandboxLayer::OnRender()
 	{
+		RenderCommand::ClearColor(glm::vec4(0.0f));
+		RenderCommand::Clear();
+
 		m_Scene.DrawScene();
 	}
 

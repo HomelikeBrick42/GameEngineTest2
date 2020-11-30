@@ -5,6 +5,8 @@
 
 #include "BrickEngine/ImGui/ImGuiLayer.hpp"
 
+#include "BrickEngine/Renderer/RenderCommand.hpp"
+
 namespace BrickEngine {
 
 	Application::Application()
@@ -22,6 +24,10 @@ namespace BrickEngine {
 				for (auto& layer : m_LayerStack)
 					layer->OnEvent(e);
 			});
+
+		m_GraphicsContext = GraphicsContext::Create(m_Window.get());
+		m_GraphicsContext->Bind();
+		RenderCommand::Init();
 
 #if BRICKENGINE_ENABLE_IMGUI
 		m_ImGuiLayer = new ImGuiLayer(m_Window.get());
@@ -53,6 +59,7 @@ namespace BrickEngine {
 #endif
 
 			m_Window->PollEvents();
+			m_GraphicsContext->SwapBuffers();
 		}
 	}
 
