@@ -14,6 +14,8 @@ namespace Sandbox {
 		virtual void OnImGuiRender();
 		virtual void OnEvent(BrickEngine::Event& e);
 	private:
+		float m_Delta = 0.0f;
+	private:
 		BrickEngine::Scene m_Scene;
 		BrickEngine::Entity m_Entity;
 	};

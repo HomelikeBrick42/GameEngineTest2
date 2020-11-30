@@ -7,6 +7,8 @@
 
 #ifdef BRICKENGINE_PLATFORM_WINDOWS
 
+#include <glad/glad.h>
+
 namespace BrickEngine {
 
     static int32_t s_WindowCount = 0;
@@ -33,6 +35,10 @@ namespace BrickEngine {
             Log::CoreInfo("Created Window '{0}' ({1}, {2})", props.Title, m_Data.Width, m_Data.Height);
 
         glfwGetWindowPos(m_Window, &m_Data.XPos, &m_Data.XPos);
+
+        glfwMakeContextCurrent(m_Window);
+        gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+        glfwSwapInterval(0);
     }
 
     WindowsWindow::~WindowsWindow()
@@ -74,6 +80,7 @@ namespace BrickEngine {
     void WindowsWindow::PollEvents() const
     {
         glfwPollEvents();
+        glfwSwapBuffers(m_Window);
     }
 
     void* WindowsWindow::GetNativeWindowHandle()

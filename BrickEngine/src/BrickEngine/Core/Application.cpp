@@ -3,6 +3,8 @@
 
 #include "BrickEngine/Events/WindowEvent.hpp"
 
+#include "BrickEngine/ImGui/ImGuiLayer.hpp"
+
 namespace BrickEngine {
 
 	Application::Application()
@@ -20,6 +22,11 @@ namespace BrickEngine {
 				for (auto& layer : m_LayerStack)
 					layer->OnEvent(e);
 			});
+
+#if BRICKENGINE_ENABLE_IMGUI
+		m_ImGuiLayer = new ImGuiLayer(m_Window.get());
+		m_LayerStack.PushOverlay(m_ImGuiLayer);
+#endif
 	}
 
 	void Application::Run()
@@ -37,6 +44,13 @@ namespace BrickEngine {
 
 			for (auto& layer : m_LayerStack)
 				layer->OnRender();
+
+#if BRICKENGINE_ENABLE_IMGUI
+			m_ImGuiLayer->Begin();
+			for (auto& layer : m_LayerStack)
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();
+#endif
 
 			m_Window->PollEvents();
 		}

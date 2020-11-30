@@ -7,6 +7,8 @@
 
 namespace BrickEngine {
 
+	class ImGuiLayer;
+
 	class Application
 	{
 	public:
@@ -21,6 +23,9 @@ namespace BrickEngine {
 	private:
 		Scope<Window> m_Window;
 		LayerStack m_LayerStack;
+#if BRICKENGINE_ENABLE_IMGUI
+		ImGuiLayer* m_ImGuiLayer = nullptr;
+#endif
 		bool m_Running = true;
 	protected:
 		Application();

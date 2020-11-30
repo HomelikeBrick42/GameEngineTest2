@@ -16,7 +16,6 @@ namespace Sandbox {
 		void OnUpdate(float dt) override
 		{
 			m_Transform->Rotation.z += 90.0f * dt;
-			Log::Info("Rotation: {0}", m_Transform->Rotation.z);
 		}
 	private:
 		TransformComponent* m_Transform = nullptr;
@@ -34,6 +33,7 @@ namespace Sandbox {
 
 	void SandboxLayer::OnUpdate(float dt)
 	{
+		m_Delta = dt;
 		m_Scene.OnUpdate(dt);
 	}
 
@@ -44,6 +44,9 @@ namespace Sandbox {
 
 	void SandboxLayer::OnImGuiRender()
 	{
+		ImGui::Begin("Test Window");
+		ImGui::Text("Frame Time: %.3fms", m_Delta * 1000.0f);
+		ImGui::End();
 	}
 
 	void SandboxLayer::OnEvent(Event& e)
