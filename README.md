@@ -10,7 +10,6 @@ Clone the repository with `git clone --recursive https://github.com/HomelikeBric
   - Comming Soon
 
 ## What's Next?
-  - Entity Component System
   - 3D Renderer
   - 2D Renderer
   - Textures
