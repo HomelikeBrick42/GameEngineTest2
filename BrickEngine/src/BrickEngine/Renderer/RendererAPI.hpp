@@ -14,6 +14,9 @@ namespace BrickEngine {
 		virtual void Clear() = 0;
 
 		virtual void SetViewport(int32_t x, int32_t y, int32_t width, int32_t height) = 0;
+
+		virtual void Draw(uint32_t first, uint32_t count) = 0;
+		virtual void DrawIndexed(uint32_t count) = 0;
 	protected:
 		RendererAPI() = default;
 	};
