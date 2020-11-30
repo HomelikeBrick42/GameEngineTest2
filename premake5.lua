@@ -160,5 +160,6 @@ project "Sandbox"
 
 	filter "configurations:Dist"
 		defines "BRICKENGINE_DIST"
+		kind "WindowedApp"
 		runtime "Release"
 		optimize "on"
