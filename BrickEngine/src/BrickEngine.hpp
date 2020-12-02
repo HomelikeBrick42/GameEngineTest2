@@ -27,6 +27,8 @@
 
 // Graphics Objects
 #include "BrickEngine/GraphicsObjects/GraphicsContext.hpp"
+#include "BrickEngine/GraphicsObjects/Shader.hpp"
+#include "BrickEngine/GraphicsObjects/VertexBuffer.hpp"
 
 // Renderer
 #include "BrickEngine/Renderer/RendererAPI.hpp"

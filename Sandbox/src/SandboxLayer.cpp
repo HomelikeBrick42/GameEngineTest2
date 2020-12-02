@@ -27,6 +27,17 @@ namespace Sandbox {
 
 		m_Entity = m_Scene.CreateEntity("Test Entity");
 		m_Entity.AddComponent<NativeScriptComponent>().Bind<RotateScript>();
+
+		const glm::vec3 vertices[] = {
+			glm::vec3( 0.0f,  0.5f, 0.0f),
+			glm::vec3( 0.5f, -0.5f, 0.0f),
+			glm::vec3(-0.5f, -0.5f, 0.0f)
+		};
+		m_VertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices), {
+			{ ShaderDataType::Float3, "a_Position" }
+		});
+
+		m_Shader = Shader::Create("assets/shaders/FlatColor.glsl");
 	}
 
 	void SandboxLayer::OnDetach()
@@ -44,6 +55,11 @@ namespace Sandbox {
 		RenderCommand::Clear();
 
 		m_Scene.DrawScene();
+
+		m_Shader->Bind();
+		m_Shader->SetFloat4("u_Color", glm::vec4(0.2f, 0.3f, 0.8f, 1.0f));
+		m_VertexBuffer->Bind();
+		RenderCommand::Draw(0, 3);
 	}
 
 	void SandboxLayer::OnImGuiRender()

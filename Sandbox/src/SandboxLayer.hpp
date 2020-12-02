@@ -18,6 +18,9 @@ namespace Sandbox {
 	private:
 		BrickEngine::Scene m_Scene;
 		BrickEngine::Entity m_Entity;
+	private:
+		BrickEngine::Ref<BrickEngine::VertexBuffer> m_VertexBuffer;
+		BrickEngine::Ref<BrickEngine::Shader> m_Shader;
 	};
 
 }
