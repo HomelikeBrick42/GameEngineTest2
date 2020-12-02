@@ -20,6 +20,7 @@ namespace Sandbox {
 		BrickEngine::Entity m_Entity;
 	private:
 		BrickEngine::Ref<BrickEngine::VertexBuffer> m_VertexBuffer;
+		BrickEngine::Ref<BrickEngine::IndexBuffer> m_IndexBuffer;
 		BrickEngine::Ref<BrickEngine::Shader> m_Shader;
 	};
 

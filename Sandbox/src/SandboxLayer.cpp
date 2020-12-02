@@ -37,6 +37,11 @@ namespace Sandbox {
 			{ ShaderDataType::Float3, "a_Position" }
 		});
 
+		const uint32_t indices[] = {
+			0, 1, 2
+		};
+		m_IndexBuffer = IndexBuffer::Create(indices, (uint32_t)std::size(indices));
+
 		m_Shader = Shader::Create("assets/shaders/FlatColor.glsl");
 	}
 
@@ -59,7 +64,8 @@ namespace Sandbox {
 		m_Shader->Bind();
 		m_Shader->SetFloat4("u_Color", glm::vec4(0.2f, 0.3f, 0.8f, 1.0f));
 		m_VertexBuffer->Bind();
-		RenderCommand::Draw(0, 3);
+		m_IndexBuffer->Bind();
+		RenderCommand::DrawIndexed(m_IndexBuffer->GetCount());
 	}
 
 	void SandboxLayer::OnImGuiRender()

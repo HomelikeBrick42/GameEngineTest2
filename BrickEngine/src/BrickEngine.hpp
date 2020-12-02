@@ -29,6 +29,7 @@
 #include "BrickEngine/GraphicsObjects/GraphicsContext.hpp"
 #include "BrickEngine/GraphicsObjects/Shader.hpp"
 #include "BrickEngine/GraphicsObjects/VertexBuffer.hpp"
+#include "BrickEngine/GraphicsObjects/IndexBuffer.hpp"
 
 // Renderer
 #include "BrickEngine/Renderer/RendererAPI.hpp"
