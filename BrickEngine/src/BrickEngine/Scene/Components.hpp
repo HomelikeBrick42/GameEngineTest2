@@ -4,8 +4,7 @@
 
 #include "BrickEngine/Scene/EntityScript.hpp"
 
-#include "BrickEngine/GraphicsObjects/VertexBuffer.hpp"
-#include "BrickEngine/GraphicsObjects/IndexBuffer.hpp"
+#include "BrickEngine/Renderer/Mesh.hpp"
 #include "BrickEngine/GraphicsObjects/Shader.hpp"
 
 namespace BrickEngine {
@@ -102,15 +101,14 @@ namespace BrickEngine {
 
 	struct MeshRendererComponent
 	{
-		Ref<VertexBuffer> Vertices;
-		Ref<IndexBuffer> Indices;
+		Ref<Mesh> Mesh;
 		Ref<Shader> Shader;
 		glm::vec4 Color;
 
 		MeshRendererComponent()
-			: Vertices(nullptr), Indices(nullptr), Shader(nullptr), Color(1.0f) {}
-		MeshRendererComponent(const Ref<VertexBuffer>& vertices, const Ref<IndexBuffer>& indices, const Ref<BrickEngine::Shader>& shader, const glm::vec4& color)
-			: Vertices(vertices), Indices(indices), Shader(shader), Color(color) {}
+			: Mesh(nullptr), Shader(nullptr), Color(1.0f) {}
+		MeshRendererComponent(const Ref<BrickEngine::Mesh>& mesh, const Ref<BrickEngine::Shader>& shader, const glm::vec4& color)
+			: Mesh(mesh), Shader(shader), Color(color) {}
 	};
 
 }

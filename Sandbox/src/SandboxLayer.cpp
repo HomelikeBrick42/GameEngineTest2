@@ -11,24 +11,21 @@ namespace Sandbox {
 	{
 		RenderCommand::SetClearColor(0.1f);
 
-		const glm::vec3 vertices[] = {
-			glm::vec3( 0.0f,  0.5f, 0.0f),
-			glm::vec3( 0.5f, -0.5f, 0.0f),
-			glm::vec3(-0.5f, -0.5f, 0.0f)
+		const std::vector<Vertex> vertices = {
+			{ glm::vec3( 0.0f,  0.5f, 0.0f) },
+			{ glm::vec3( 0.5f, -0.5f, 0.0f) },
+			{ glm::vec3(-0.5f, -0.5f, 0.0f) }
 		};
-		m_VertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices), {
-			{ ShaderDataType::Float3, "a_Position" }
-		});
-
-		const uint32_t indices[] = {
+		const std::vector<uint32_t> indices = {
 			0, 1, 2
 		};
-		m_IndexBuffer = IndexBuffer::Create(indices, (uint32_t)std::size(indices));
+		m_Mesh = CreateRef<Mesh>(vertices, indices);
+		m_Mesh = MeshFactory::CreateCube();
 
 		m_Shader = Shader::Create("assets/shaders/FlatColor.glsl");
 
 		Entity entity = m_Scene.CreateEntity("Test Entity");
-		entity.AddComponent<MeshRendererComponent>(m_VertexBuffer, m_IndexBuffer, m_Shader, glm::vec4(0.2f, 0.3f, 0.8f, 1.0f));
+		entity.AddComponent<MeshRendererComponent>(m_Mesh, m_Shader, glm::vec4(0.2f, 0.3f, 0.8f, 1.0f));
 		entity.AddComponent<NativeScriptComponent>().Bind<RotateScript>();
 
 		Entity camera = m_Scene.CreateEntity("Camera");
@@ -56,7 +53,8 @@ namespace Sandbox {
 	void SandboxLayer::OnImGuiRender()
 	{
 		ImGui::Begin("Test Window");
-		ImGui::Text("FPS: %.3f\nFrame Time: %.3fms", 1.0f / m_Delta, m_Delta * 1000.0f);
+		ImGui::Text("FPS: %.3f", 1.0f / m_Delta);
+		ImGui::Text("Frame Time: %.3fms", m_Delta * 1000.0f);
 		ImGui::End();
 	}
 

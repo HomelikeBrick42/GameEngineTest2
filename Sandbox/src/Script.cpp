@@ -12,7 +12,9 @@ namespace Sandbox {
 
 	void RotateScript::OnUpdate(float dt)
 	{
-		m_Transform->Rotation.z += 45.0f * dt;
+		m_Transform->Rotation.x += 40.0f * dt;
+		m_Transform->Rotation.y += 30.0f * dt;
+		m_Transform->Rotation.z += 20.0f * dt;
 	}
 
 	void CameraScript::OnCreate()

@@ -33,5 +33,10 @@
 #include "BrickEngine/GraphicsObjects/IndexBuffer.hpp"
 
 // Renderer
+#include "BrickEngine/Renderer/Vertex.hpp"
+#include "BrickEngine/Renderer/Mesh.hpp"
 #include "BrickEngine/Renderer/RendererAPI.hpp"
 #include "BrickEngine/Renderer/RenderCommand.hpp"
+
+// Renderer Util
+#include "BrickEngine/RendererUtil/MeshFactory.hpp"

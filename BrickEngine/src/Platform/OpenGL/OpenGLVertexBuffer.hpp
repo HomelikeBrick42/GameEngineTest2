@@ -16,7 +16,7 @@ namespace BrickEngine {
 		virtual void Bind() const override;
 		virtual void UnBind() const override;
 
-		virtual void SetData(void* data, uint32_t size) override;
+		virtual void SetData(const void* data, uint32_t size) override;
 	private:
 		uint32_t m_VertexArrayRendererID;
 		uint32_t m_RendererID;

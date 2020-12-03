@@ -17,7 +17,7 @@ namespace BrickEngine {
 		virtual void Bind() const = 0;
 		virtual void UnBind() const = 0;
 
-		virtual void SetData(void* data, uint32_t size) = 0;
+		virtual void SetData(const void* data, uint32_t size) = 0;
 
 		static Ref<VertexBuffer> Create(const void* data, uint32_t size, const BufferLayout& layout);
 	protected:

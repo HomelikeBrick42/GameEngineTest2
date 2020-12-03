@@ -85,16 +85,13 @@ namespace BrickEngine {
         {
             m_Registry.group<TransformComponent, MeshRendererComponent>().each([&](entt::entity id, TransformComponent& tc, MeshRendererComponent& mc)
                 {
-                    if (mc.Vertices && mc.Indices && mc.Shader)
-                    {
-                        mc.Vertices->Bind();
-                        mc.Indices->Bind();
-                        mc.Shader->Bind();
-                        mc.Shader->SetFloat4("u_Color", mc.Color);
-                        mc.Shader->SetFloatMatrix4x4("u_Model", tc.GetMatrix());
-                        mc.Shader->SetFloatMatrix4x4("u_ViewProjection", viewProjection);
-                        RenderCommand::DrawIndexed(mc.Indices->GetCount());
-                    }
+                    mc.Mesh->GetVertexBuffer()->Bind();
+                    mc.Mesh->GetIndexBuffer()->Bind();
+                    mc.Shader->Bind();
+                    mc.Shader->SetFloat4("u_Color", mc.Color);
+                    mc.Shader->SetFloatMatrix4x4("u_Model", tc.GetMatrix());
+                    mc.Shader->SetFloatMatrix4x4("u_ViewProjection", viewProjection);
+                    RenderCommand::DrawIndexed(mc.Mesh->GetIndexBuffer()->GetCount());
                 });
         }
     }
