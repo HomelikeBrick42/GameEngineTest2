@@ -7,6 +7,8 @@
 
 #include "BrickEngine/Renderer/RenderCommand.hpp"
 
+#include "BrickEngine/Core/Input.hpp"
+
 namespace BrickEngine {
 
 	Application* Application::s_Instance = nullptr;
@@ -28,6 +30,8 @@ namespace BrickEngine {
 
 				for (auto& layer : m_LayerStack)
 					layer->OnEvent(e);
+
+				Input::OnEvent(e);
 			});
 
 		m_GraphicsContext = GraphicsContext::Create(m_Window.get());
@@ -65,6 +69,7 @@ namespace BrickEngine {
 
 			m_Window->PollEvents();
 			m_GraphicsContext->SwapBuffers();
+			Input::EndFrame();
 		}
 	}
 

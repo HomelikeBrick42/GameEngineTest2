@@ -1,25 +1,11 @@
 #include "pch.hpp"
 #include "SandboxLayer.hpp"
 
+#include "Script.hpp"
+
 using namespace BrickEngine;
 
 namespace Sandbox {
-
-	class RotateScript : public NativeEntityScript
-	{
-	public:
-		void OnCreate() override
-		{
-			m_Transform = &GetOrAddComponent<TransformComponent>();
-		}
-
-		void OnUpdate(float dt) override
-		{
-			m_Transform->Rotation.z += 45.0f * dt;
-		}
-	private:
-		TransformComponent* m_Transform = nullptr;
-	};
 
 	void SandboxLayer::OnAttach()
 	{
@@ -48,6 +34,7 @@ namespace Sandbox {
 		Entity camera = m_Scene.CreateEntity("Camera");
 		camera.GetComponent<TransformComponent>().Position.z = -3.0f;
 		camera.AddComponent<PerspectiveCameraComponent>(45.0f).MainCamera = true;
+		camera.AddComponent<NativeScriptComponent>().Bind<CameraScript>();
 	}
 
 	void SandboxLayer::OnDetach()

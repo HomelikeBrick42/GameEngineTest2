@@ -11,6 +11,7 @@
 #include "BrickEngine/Core/Layer.hpp"
 #include "BrickEngine/Core/LayerStack.hpp"
 #include "BrickEngine/Core/Window.hpp"
+#include "BrickEngine/Core/Input.hpp"
 
 #include "BrickEngine/Core/Application.hpp"
 
