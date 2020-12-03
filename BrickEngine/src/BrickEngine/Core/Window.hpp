@@ -4,6 +4,8 @@
 
 #include "BrickEngine/Events/Event.hpp"
 
+#include "BrickEngine/Core/KeyCodes.hpp"
+
 namespace BrickEngine {
 
 	struct WindowProps
@@ -32,6 +34,11 @@ namespace BrickEngine {
 
 		virtual void SetPos(const glm::ivec2& pos) = 0;
 		virtual glm::ivec2 GetPos() const = 0;
+
+		virtual bool IsKeyPressed(KeyCode key) = 0;
+		virtual bool IsMouseButtonPressed(MouseButton button) = 0;
+
+		virtual glm::vec2 GetMousePosition() = 0;
 
 		virtual void Focus() const = 0;
 		virtual void SetVisible(bool visible) = 0;
