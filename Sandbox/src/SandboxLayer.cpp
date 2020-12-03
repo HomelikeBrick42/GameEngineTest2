@@ -15,7 +15,7 @@ namespace Sandbox {
 
 		void OnUpdate(float dt) override
 		{
-			m_Transform->Rotation.z += 90.0f * dt;
+			m_Transform->Rotation.z += 45.0f * dt;
 		}
 	private:
 		TransformComponent* m_Transform = nullptr;
@@ -24,9 +24,6 @@ namespace Sandbox {
 	void SandboxLayer::OnAttach()
 	{
 		RenderCommand::SetClearColor(0.1f);
-
-		m_Entity = m_Scene.CreateEntity("Test Entity");
-		m_Entity.AddComponent<NativeScriptComponent>().Bind<RotateScript>();
 
 		const glm::vec3 vertices[] = {
 			glm::vec3( 0.0f,  0.5f, 0.0f),
@@ -43,6 +40,14 @@ namespace Sandbox {
 		m_IndexBuffer = IndexBuffer::Create(indices, (uint32_t)std::size(indices));
 
 		m_Shader = Shader::Create("assets/shaders/FlatColor.glsl");
+
+		Entity entity = m_Scene.CreateEntity("Test Entity");
+		entity.AddComponent<MeshRendererComponent>(m_VertexBuffer, m_IndexBuffer, m_Shader, glm::vec4(0.2f, 0.3f, 0.8f, 1.0f));
+		entity.AddComponent<NativeScriptComponent>().Bind<RotateScript>();
+
+		Entity camera = m_Scene.CreateEntity("Camera");
+		camera.GetComponent<TransformComponent>().Position.z = -3.0f;
+		camera.AddComponent<PerspectiveCameraComponent>(45.0f).MainCamera = true;
 	}
 
 	void SandboxLayer::OnDetach()
@@ -60,12 +65,6 @@ namespace Sandbox {
 		RenderCommand::Clear();
 
 		m_Scene.DrawScene();
-
-		m_Shader->Bind();
-		m_Shader->SetFloat4("u_Color", glm::vec4(0.2f, 0.3f, 0.8f, 1.0f));
-		m_VertexBuffer->Bind();
-		m_IndexBuffer->Bind();
-		RenderCommand::DrawIndexed(m_IndexBuffer->GetCount());
 	}
 
 	void SandboxLayer::OnImGuiRender()

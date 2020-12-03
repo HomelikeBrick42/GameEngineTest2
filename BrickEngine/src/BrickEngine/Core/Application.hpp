@@ -21,6 +21,8 @@ namespace BrickEngine {
 		void PushOverlay(Layer* overlay) { m_LayerStack.PushOverlay(overlay); }
 		void PopLayer(Layer* layer) { m_LayerStack.PopLayer(layer); }
 		void PopOverlay(Layer* overlay) { m_LayerStack.PopOverlay(overlay); }
+	public:
+		static glm::vec2 GetWindowSize() { return s_Instance->m_Window->GetSize(); }
 	private:
 		Scope<Window> m_Window;
 		Scope<GraphicsContext> m_GraphicsContext;
@@ -29,6 +31,8 @@ namespace BrickEngine {
 		ImGuiLayer* m_ImGuiLayer = nullptr;
 #endif
 		bool m_Running = true;
+	private:
+		static Application* s_Instance;
 	protected:
 		Application();
 	};

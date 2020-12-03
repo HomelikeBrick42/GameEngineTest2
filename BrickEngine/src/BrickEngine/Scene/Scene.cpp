@@ -5,13 +5,26 @@
 
 #include "BrickEngine/Scene/Components.hpp"
 
+#include "BrickEngine/Renderer/RenderCommand.hpp"
+
+#include "BrickEngine/Core/Application.hpp"
+
 #pragma warning(push)
 #pragma warning(disable : 4267)
 
 namespace BrickEngine {
 
+    static void OnPerspectiveCameraAdded(entt::registry& registry, entt::entity entity)
+    {
+        PerspectiveCameraComponent& pc = registry.get<PerspectiveCameraComponent>(entity);
+        glm::vec2 windowSize = Application::GetWindowSize();
+        pc.Width = windowSize.x;
+        pc.Height = windowSize.y;
+    }
+
     Scene::Scene()
     {
+        m_Registry.on_construct<PerspectiveCameraComponent>().connect<&OnPerspectiveCameraAdded>();
     }
 
     Scene::~Scene()
@@ -21,6 +34,8 @@ namespace BrickEngine {
                 if (nsc.Instance)
                     nsc.DestroyScript(nsc.Instance);
             });
+
+        m_Registry.on_construct<PerspectiveCameraComponent>().connect<&OnPerspectiveCameraAdded>();
     }
 
     Entity Scene::CreateEntity(const std::string& name)
@@ -45,6 +60,43 @@ namespace BrickEngine {
 
     void Scene::DrawScene()
     {
+        bool foundCamera = false;
+        glm::mat4 viewProjection = glm::mat4(1.0f);
+
+        m_Registry.view<TransformComponent, PerspectiveCameraComponent>().each([&](entt::entity id, TransformComponent& tc, PerspectiveCameraComponent& pc)
+            {
+                if (!foundCamera && pc.MainCamera)
+                {
+                    foundCamera = true;
+                    viewProjection = pc.GetMatrix() * glm::inverse(tc.GetMatrix());
+                }
+            });
+        if (!foundCamera)
+            m_Registry.view<TransformComponent, OrthographicCameraComponent>().each([&](entt::entity id, TransformComponent& tc, OrthographicCameraComponent& oc)
+                {
+                    if (!foundCamera && oc.MainCamera)
+                    {
+                        foundCamera = true;
+                        viewProjection = oc.GetMatrix() * glm::inverse(tc.GetMatrix());
+                    }
+                });
+
+        if (foundCamera)
+        {
+            m_Registry.group<TransformComponent, MeshRendererComponent>().each([&](entt::entity id, TransformComponent& tc, MeshRendererComponent& mc)
+                {
+                    if (mc.Vertices && mc.Indices && mc.Shader)
+                    {
+                        mc.Vertices->Bind();
+                        mc.Indices->Bind();
+                        mc.Shader->Bind();
+                        mc.Shader->SetFloat4("u_Color", mc.Color);
+                        mc.Shader->SetFloatMatrix4x4("u_Model", tc.GetMatrix());
+                        mc.Shader->SetFloatMatrix4x4("u_ViewProjection", viewProjection);
+                        RenderCommand::DrawIndexed(mc.Indices->GetCount());
+                    }
+                });
+        }
     }
 
     void Scene::OnUpdate(float dt)

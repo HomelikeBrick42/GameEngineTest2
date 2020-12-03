@@ -4,6 +4,10 @@
 
 #include "BrickEngine/Scene/EntityScript.hpp"
 
+#include "BrickEngine/GraphicsObjects/VertexBuffer.hpp"
+#include "BrickEngine/GraphicsObjects/IndexBuffer.hpp"
+#include "BrickEngine/GraphicsObjects/Shader.hpp"
+
 namespace BrickEngine {
 
 	struct TagComponent
@@ -65,13 +69,15 @@ namespace BrickEngine {
 		bool MainCamera;
 
 		PerspectiveCameraComponent()
-			: Width(1280.0f), Height(720.0f), Fov(glm::radians(45.0f)), Near(0.001f), Far(1000.0f), FixedAspect(true), MainCamera(false) {}
+			: Width(1280.0f), Height(720.0f), Fov(45.0f), Near(0.001f), Far(1000.0f), FixedAspect(true), MainCamera(false) {}
 		PerspectiveCameraComponent(float width, float height, float fov, float _near = 0.001f, float _far = 1000.0f, bool fixedAspect = false)
 			: Width(width), Height(height), Fov(fov), Near(_near), Far(_far), FixedAspect(fixedAspect), MainCamera(false) {}
+		PerspectiveCameraComponent(float fov, float _near = 0.001f, float _far = 1000.0f, bool fixedAspect = false)
+			: Width(0), Height(0), Fov(fov), Near(_near), Far(_far), FixedAspect(fixedAspect), MainCamera(false) {}
 
 		glm::mat4 GetMatrix() const
 		{
-			return glm::perspectiveLH(Fov, Width / Height, Near, Far);
+			return glm::perspectiveLH(glm::radians(Fov), Width / Height, Near, Far);
 		}
 	};
 
@@ -92,6 +98,19 @@ namespace BrickEngine {
 		{
 			return glm::orthoLH(Left, Right, Bottom, Top, Near, Far);
 		}
+	};
+
+	struct MeshRendererComponent
+	{
+		Ref<VertexBuffer> Vertices;
+		Ref<IndexBuffer> Indices;
+		Ref<Shader> Shader;
+		glm::vec4 Color;
+
+		MeshRendererComponent()
+			: Vertices(nullptr), Indices(nullptr), Shader(nullptr), Color(1.0f) {}
+		MeshRendererComponent(const Ref<VertexBuffer>& vertices, const Ref<IndexBuffer>& indices, const Ref<BrickEngine::Shader>& shader, const glm::vec4& color)
+			: Vertices(vertices), Indices(indices), Shader(shader), Color(color) {}
 	};
 
 }

@@ -17,8 +17,6 @@ namespace Sandbox {
 		float m_Delta = 0.0f;
 	private:
 		BrickEngine::Scene m_Scene;
-		BrickEngine::Entity m_Entity;
-	private:
 		BrickEngine::Ref<BrickEngine::VertexBuffer> m_VertexBuffer;
 		BrickEngine::Ref<BrickEngine::IndexBuffer> m_IndexBuffer;
 		BrickEngine::Ref<BrickEngine::Shader> m_Shader;

@@ -9,8 +9,13 @@
 
 namespace BrickEngine {
 
+	Application* Application::s_Instance = nullptr;
+
 	Application::Application()
 	{
+		BRICKENGINE_CORE_ASSERT(!s_Instance, "Application already exists!");
+		s_Instance = this;
+
 		m_Window = Window::Create(WindowProps("BrickEngine Window", 1280, 720, false, true));
 		m_Window->SetEventCallbackFn([&](Event& e)
 			{
