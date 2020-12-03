@@ -17,8 +17,6 @@ namespace BrickEngine {
 		static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
 		static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 
-#ifndef BRICKENGINE_DIST
-
 		template<typename... Args>
 		static void CoreTrace(const char* fmt, Args&&...args) { s_CoreLogger->trace(fmt, std::forward<Args>(args)...); }
 		template<typename... Args>
@@ -40,33 +38,6 @@ namespace BrickEngine {
 		static void Error(const char* fmt, Args&&...args) { s_ClientLogger->error(fmt, std::forward<Args>(args)...); }
 		template<typename... Args>
 		static void Fatal(const char* fmt, Args&&...args) { s_ClientLogger->critical(fmt, std::forward<Args>(args)...); }
-
-#else
-
-		// The compiler will remove these functions
-		template<typename... Args>
-		static void CoreTrace(const char* fmt, Args&&...args) {}
-		template<typename... Args>
-		static void CoreInfo(const char* fmt, Args&&...args) {}
-		template<typename... Args>
-		static void CoreWarn(const char* fmt, Args&&...args) {}
-		template<typename... Args>
-		static void CoreError(const char* fmt, Args&&...args) {}
-		template<typename... Args>
-		static void CoreFatal(const char* fmt, Args&&...args) {}
-
-		template<typename... Args>
-		static void Trace(const char* fmt, Args&&...args) {}
-		template<typename... Args>
-		static void Info(const char* fmt, Args&&...args) {}
-		template<typename... Args>
-		static void Warn(const char* fmt, Args&&...args) {}
-		template<typename... Args>
-		static void Error(const char* fmt, Args&&...args) {}
-		template<typename... Args>
-		static void Fatal(const char* fmt, Args&&...args) {}
-
-#endif
 	private:
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;
 		static std::shared_ptr<spdlog::logger> s_ClientLogger;
