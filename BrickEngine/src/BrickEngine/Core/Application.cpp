@@ -33,6 +33,7 @@ namespace BrickEngine {
 
 				Input::OnEvent(e);
 			});
+		Input::Init(m_Window.get());
 
 		m_GraphicsContext = GraphicsContext::Create(m_Window.get());
 		m_GraphicsContext->Bind();

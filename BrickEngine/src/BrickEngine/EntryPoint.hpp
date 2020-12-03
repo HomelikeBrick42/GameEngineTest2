@@ -3,7 +3,6 @@
 int main(int /*argc*/, char** /*argv*/)
 {
 	BrickEngine::Log::Init();
-	BrickEngine::Input::Init();
 
 	BrickEngine::Application* app = BrickEngine::CreateApplication();
 	app->Run();

@@ -50,7 +50,6 @@ namespace Sandbox {
 	void SandboxLayer::OnRender()
 	{
 		RenderCommand::Clear();
-
 		m_Scene.DrawScene();
 	}
 
