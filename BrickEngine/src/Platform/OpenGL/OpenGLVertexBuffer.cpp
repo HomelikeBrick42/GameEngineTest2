@@ -56,6 +56,7 @@ namespace BrickEngine {
 	}
 
     OpenGLVertexBuffer::OpenGLVertexBuffer(const void* data, uint32_t size, const BufferLayout& layout)
+		: m_MaxSize(size)
     {
         glGenVertexArrays(1, &m_VertexArrayRendererID);
         glBindVertexArray(m_VertexArrayRendererID);
@@ -111,7 +112,13 @@ namespace BrickEngine {
     {
 		glBindVertexArray(m_VertexArrayRendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
-		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+		if (m_MaxSize >= size)
+			glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+		else
+		{
+			glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+			m_MaxSize = size;
+		}
     }
 
 }

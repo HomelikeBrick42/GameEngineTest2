@@ -21,6 +21,7 @@ namespace BrickEngine {
 		uint32_t m_VertexArrayRendererID;
 		uint32_t m_RendererID;
 		BufferLayout m_Layout;
+		uint32_t m_MaxSize;
 	};
 
 }
